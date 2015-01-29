@@ -12,6 +12,14 @@ ABS Accordion is an awesome, super, category supported, lightweight plugin for y
 
 This plugin will enable Accordion in your wordpress theme. You can embed accordion via shortcode in everywhere you want, even in theme files. 
 
+Plugin Features
+
+* Shortcode System
+* TinyMCE Button added for generating Shortcode.
+* Very Lightweight. Only 12KB.
+* Easy documentation
+& many More.
+
 Wanna see how it works? Click here: http://www.absiddik.net/demo/wp/plugin/abs-accordion/
 
 == Installation ==
@@ -46,9 +54,13 @@ You can install as others regular wordpress plugin. No different way. Please see
 
 1. Installed in demo server.
 
+2. TinyMCE Button
+
 
 
 == Changelog ==
 
 = 1.0 =
 * Initial Release
+= 1.0.1 =
+* Add TinyMCE Button for Shortcode

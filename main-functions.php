@@ -24,16 +24,12 @@ add_action( 'init', 'abs_accordion_latest_jquery' );
 function abs_faq_main_jquery() {
 	wp_enqueue_script( 'abs-accordion-js', plugins_url( '/js/paper-collapse.min.js', __FILE__ ), array('jquery'), 1.0, false);
 
-	
 	wp_enqueue_style( 'abs-accordion-css', plugins_url( '/css/paper-collapse.css', __FILE__ ));
 	
 	wp_enqueue_style( 'prefix-font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css', array(), '4.0.3' );
-
-	
 }
 
 add_action( 'init', 'abs_faq_main_jquery' );
-
 
 /* This sortcode use for latest_news  */
 function abs_accordion_shortcode($atts){
@@ -69,11 +65,30 @@ function abs_accordion_shortcode($atts){
 add_shortcode('abs_accordion', 'abs_accordion_shortcode');
 
 
+/* ABS accordion shortcode button*/
+function abs_accordion_buttons() {
+	add_filter ("mce_external_plugins", "my_external_js");
+	add_filter ("mce_buttons", "our_awesome_buttons");
+}
+
+function my_external_js($plugin_array) {
+	$plugin_array['absaccordion'] = plugins_url('js/custom-button.js', __FILE__);
+	return $plugin_array;
+}
+
+function our_awesome_buttons($buttons) {
+	array_push ($buttons, 'abs_accordion');
+	return $buttons;
+}
+add_action ('init', 'abs_accordion_buttons');
+
+
 
 
 
 /*This custom post for ABS Accordion*/
 add_action( 'init', 'codex_book_init' );
+
 function codex_book_init() {
 	$labels = array(
 		'name'               => _x( 'Accordion Item', 'abs-faq-panel' ),
@@ -109,8 +124,6 @@ function codex_book_init() {
 
 	register_post_type( 'acc-items', $args );
 }
-
-
 
 /* ----This Code for Woki Item Custom texonomy------*/
 function custom_post_taxonomy() {
