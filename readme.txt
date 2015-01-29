@@ -1,7 +1,7 @@
 === ABS Accordion ===
 Tags: Accordion, Faq Accordion, jQuery type effect, Type effect jQuery accordion
-Requires at least: 3.0.1
-Tested up to: 3.9
+Requires at least: 3.9
+Tested up to: 4.0.1
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
