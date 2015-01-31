@@ -56,7 +56,13 @@ You can install as others regular wordpress plugin. No different way. Please see
 
 2. TinyMCE Button
 
+3. ABS Accordion custompost 
 
+4. Add New ABS Accordion post 
+
+5. Put Accordion Ttitle and content 
+
+6. Add new category and select category 
 
 == Changelog ==
 
