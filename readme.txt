@@ -14,7 +14,7 @@ ABS Accordion is an awesome, super, category supported, lightweight plugin for y
 
 This plugin will enable Accordion in your wordpress theme. You can embed accordion via shortcode in everywhere you want, even in theme files. 
 
-Plugin Features
+= Plugin Features =
 
 * Shortcode System.
 * TinyMCE Button added for generating Shortcode.
