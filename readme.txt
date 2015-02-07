@@ -3,7 +3,7 @@ Contributors: ab siddik
 Donate link: http://www.absiddik.net/demo/wp/plugin/abs-accordion/?page_id=23
 Tags: Accordion, Faq Accordion, jQuery type effect, Type effect jQuery accordion
 Requires at least: 3.9
-Tested up to: 4.0.1
+Tested up to: 4.1
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,13 +16,18 @@ This plugin will enable Accordion in your wordpress theme. You can embed accordi
 
 Plugin Features
 
-* Shortcode System
+* Shortcode System.
 * TinyMCE Button added for generating Shortcode.
 * Very Lightweight. Only 12KB.
-* Easy documentation
-& many More.
+* Image support in accordion.
+* YouTube video support.
+* Vimeo video support.
+* Easy documentation.
+* And many More.
 
 Wanna see how it works? Click here: http://www.absiddik.net/demo/wp/plugin/abs-accordion/
+
+This plugin have a premium version. There have many more features. If you need the premium version then contact with us www.absiddik.net  .
 
 == Installation ==
 
@@ -50,6 +55,10 @@ Shortcodes
 
 You can install as others regular wordpress plugin. No different way. Please see on installation tab.
 
+= Have more features in this plugin? =
+
+This plugin have a premium version. There have many more features. If you need the premium version then contact with us www.absiddik.net  .
+
 
 
 == Screenshots ==
@@ -66,9 +75,17 @@ You can install as others regular wordpress plugin. No different way. Please see
 
 6. Add new category and select category 
 
+7. Photo in accordion
+
+8. YouTube video in accordion
+
+9. Vimeo video  in accordion
+
 == Changelog ==
 
 = 1.0 =
 * Initial Release
 = 1.0.1 =
 * Add TinyMCE Button for Shortcode
+= 1.0.2 =
+* Add some features
