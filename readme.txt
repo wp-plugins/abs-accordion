@@ -22,6 +22,7 @@ This plugin will enable Accordion in your wordpress theme. You can embed accordi
 * Image support in accordion.
 * YouTube video support.
 * Vimeo video support.
+* Custom icon support for accordion item.
 * Easy documentation.
 * And many More.
 
@@ -89,3 +90,5 @@ This plugin have a premium version. There have many more features. If you need t
 * Add TinyMCE Button for Shortcode
 = 1.0.2 =
 * Add some features
+= 1.0.3 =
+* Custom icon support for accordion item
