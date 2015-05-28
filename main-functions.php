@@ -23,6 +23,7 @@ add_action( 'init', 'abs_accordion_latest_jquery' );
  */
 function abs_faq_main_jquery() {
 	wp_enqueue_script( 'abs-accordion-js', plugins_url( '/js/paper-collapse.min.js', __FILE__ ), array('jquery'), 1.0, false);
+	wp_enqueue_script( 'abs-accordion-active-js', plugins_url( '/js/active.js', __FILE__ ), array('jquery'), 1.5, false);
 
 	wp_enqueue_style( 'abs-accordion-css', plugins_url( '/css/paper-collapse.css', __FILE__ ));
 	
@@ -31,7 +32,17 @@ function abs_faq_main_jquery() {
 
 add_action( 'init', 'abs_faq_main_jquery' );
 
-/* This sortcode use for latest_news  */
+
+
+
+
+
+
+
+
+
+
+/* This sortcode use for latest_news  
 function abs_accordion_shortcode($atts){
 	extract( shortcode_atts( array(
 		'category' => '',
@@ -69,6 +80,66 @@ function abs_accordion_shortcode($atts){
 	return $list;
 }
 add_shortcode('abs_accordion', 'abs_accordion_shortcode');
+
+
+*/
+
+
+/* This sortcode use for latest_news  */
+function abs_accordion_shortcode($atts){
+	extract( shortcode_atts( array(
+		'category' => '',
+	), $atts, 'category_post' ) );
+	
+    $q = new WP_Query(
+        array( 'acc_cat' => $category, 'posts_per_page' => -1, 'post_type' => 'acc-items')
+        );
+	$list = '<div class="accordion-box">
+	';
+
+	while($q->have_posts()) : $q->the_post();
+		//get the ID of your post in the loop
+		$idd = get_the_ID();
+		
+		global $post;
+		$accordion_icon = get_post_meta($idd, 'accordion_icon', true);
+			
+			$list .= '
+					<div class="collapse-card">
+						<div class="collapse-card__heading" >
+							<div class="collapse-card__title">';
+								if($accordion_icon){
+									$list .= '<i class="fa '.$accordion_icon.' fa-2x fa-fw"></i>';
+								}else{
+									$list .= '<i class="fa fa-question-circle fa-2x fa-fw"></i>';
+								}
+									$list .='<strong>'.get_the_title().'</strong>
+							</div>
+						</div>
+						<div class="collapse-card__body">
+							<p>'.get_the_content().'</p>
+						</div>
+					</div>
+					';        
+	endwhile;
+	$list.= '
+	</div>';
+	wp_reset_query();
+	return $list;
+}
+add_shortcode('abs_accordion', 'abs_accordion_shortcode');
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ABS accordion shortcode button*/
