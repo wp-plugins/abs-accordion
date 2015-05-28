@@ -91,3 +91,6 @@ This plugin have a premium version. There have many more features. If you need t
 * Add some features
 = 1.0.3 =
 * Custom icon support for accordion item
+= 1.5 =
+* Update some internal funcetion.
+* Fix bug for collaps.
