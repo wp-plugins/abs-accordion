@@ -5,7 +5,7 @@ Plugin Name: ABS Accordion
 Plugin URI: http://www.absiddik.net/demo/wp/plugin/abs-accordion
 Description: This plugin will enable accordion in your wordpress theme. You can embed accordion via shortcode in everywhere you want, even in theme files. 
 Author: AB Siddik
-Version: 1.0.3
+Version: 1.5
 Author URI: http://absiddik.net
 */
 
