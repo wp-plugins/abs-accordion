@@ -15,7 +15,7 @@ This plugin will enable Accordion in your wordpress theme. You can embed accordi
 
 = Plugin Features =
 
-* Shortcode System.
+* Shortcode System-->|<.
 * TinyMCE Button added for generating Shortcode.
 * Very Lightweight. Only 12KB.
 * Image support in accordion.
