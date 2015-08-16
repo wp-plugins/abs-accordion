@@ -1,9 +1,8 @@
 === ABS Accordion ===
-Contributors: siddiknmh
 Donate link: http://www.absiddik.net
 Tags: Accordion, Faq Accordion, jQuery type effect, Type effect jQuery accordion
 Requires at least: 3.9
-Tested up to: 4.2.2
+Tested up to: 4.2.4
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -14,11 +13,13 @@ ABS Accordion is an awesome, super, category supported, lightweight plugin for y
 
 This plugin will enable Accordion in your wordpress theme. You can embed accordion via shortcode in everywhere you want, even in theme files. 
 
-= Plugin Features =
+*[View a live demo &raquo;](http://www.absiddik.net/demo/wp/plugin/abs-accordion/)
 
-* Shortcode System-->|<.
+= Plugin Features =
+* Easy settings options. 
+* Shortcode System.
 * TinyMCE Button added for generating Shortcode.
-* Very Lightweight. Only 12KB.
+* Very Lightweight.
 * Image support in accordion.
 * YouTube video support.
 * Vimeo video support.
@@ -26,9 +27,6 @@ This plugin will enable Accordion in your wordpress theme. You can embed accordi
 * Easy documentation.
 * And many More.
 
-Wanna see how it works? Click here: http://www.absiddik.net/demo/wp/plugin/abs-accordion/
-
-This plugin have a premium version. There have many more features. If you need the premium version then contact with us www.absiddik.net  .
 
 == Installation ==
 
@@ -94,4 +92,9 @@ This plugin have a premium version. There have many more features. If you need t
 * Custom icon support for accordion item
 = 1.5 =
 * Update some internal funcetion.
-* Fix bug for collaps.
+* Fix bug for collapse.
+= 1.6 =
+* Add Easy settings options.
+* Fix metabox bug.
+
+

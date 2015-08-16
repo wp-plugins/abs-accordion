@@ -5,22 +5,47 @@ Plugin Name: ABS Accordion
 Plugin URI: http://www.absiddik.net/demo/wp/plugin/abs-accordion
 Description: This plugin will enable accordion in your wordpress theme. You can embed accordion via shortcode in everywhere you want, even in theme files. 
 Author: AB Siddik
-Version: 1.5
-Author URI: http://absiddik.net
+Version: 1.6
+Author URI: http://wexteam.com
 */
 
 
-/*
- *Latest Jquery For ABS Accordion Plugin.
- */
+
+/*------------Add Setting function------------*/
+
+require_once dirname( __FILE__ ) . '/class.settings-api.php';
+require_once dirname( __FILE__ ) . '/acc-settings-filed.php';
+
+new Abs_Acc_Settings_API_Test();
+
+
+
+/*------------trigger setting api class------------*/
+
+function abs_acc_get_option( $option, $section, $default = '' ) {
+ 
+    $options = get_option( $section );
+ 
+    if ( isset( $options[$option] ) ) {
+        return $options[$option];
+    }
+ 
+    return $default;
+}
+
+
+
+/*------------Latest Jquery For ABS Accordion Plugin------------*/
+
 function abs_accordion_latest_jquery() {
     wp_enqueue_script( 'jquery' );
 }
 add_action( 'init', 'abs_accordion_latest_jquery' );
 
-/**
- * Main Jquery and Style for ABS Accordion Plugin,
- */
+
+
+/*------------Main Jquery and Style for ABS Accordion Plugin------------*/
+
 function abs_faq_main_jquery() {
 	wp_enqueue_script( 'abs-accordion-js', plugins_url( '/js/paper-collapse.min.js', __FILE__ ), array('jquery'), 1.0, false);
 	wp_enqueue_script( 'abs-accordion-active-js', plugins_url( '/js/active.js', __FILE__ ), array('jquery'), 1.5, false);
@@ -29,28 +54,68 @@ function abs_faq_main_jquery() {
 	
 	wp_enqueue_style( 'prefix-font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css', array(), '4.3.0' );
 }
-
 add_action( 'init', 'abs_faq_main_jquery' );
 
 
 
+/*-----------Add style in header for settings options--------*/
+function style_for_setting_options(){
+?>
+<style type="text/css">
+		.collapse-card__close_handler{
+			display:<?php echo abs_acc_get_option( 'extra_collapse_button', 'abs_acc_basics', 'none' );?>
+		}
+		.collapse-card__title{
+			background-color:<?php echo abs_acc_get_option( 'title_bg_color', 'abs_acc_styles', '#c1c1c1' );?>;
+			color:<?php echo abs_acc_get_option( 'title_color', 'abs_acc_styles', '#777777' );?> ;
+		}
+		.collapse-card{
+			border-color:<?php echo abs_acc_get_option( 'border_color', 'abs_acc_styles', '#eeeeee' );?> ;
+		}
+		.collapse-card__title{
+				font-size: <?php echo abs_acc_get_option( 'title_font_size', 'abs_acc_styles', '18' );?>px;
+		}
+		.collapse-card__body p{
+			color:<?php echo abs_acc_get_option( 'content_color', 'abs_acc_styles', '#999999' );?>;
+			font-size:<?php echo abs_acc_get_option( 'content_font_size', 'abs_acc_styles', '15' );?>px;
+		}
+	</style>
+<?php
+}
 
+add_action('wp_head','style_for_setting_options');
 
+/*-----------Add script in footer for settings options--------*/
+function script_for_setting_options(){
+?>
+<script type="text/javascript">
+	jQuery(function () {
+		jQuery(".collapse-card").paperCollapse({
+			animationDuration: <?php echo abs_acc_get_option( 'animation_duration', 'abs_acc_basics', '400' );?>,
+			
+		})
+	})
+</script>
+<?php
+}
 
+add_action('wp_footer','script_for_setting_options');
 
+/*------------This sortcode use for ABS Accordion------------*/
 
-
-
-
-/* This sortcode use for latest_news  
 function abs_accordion_shortcode($atts){
 	extract( shortcode_atts( array(
 		'category' => '',
 	), $atts, 'category_post' ) );
 	
     $q = new WP_Query(
-        array( 'acc_cat' => $category, 'posts_per_page' => -1, 'post_type' => 'acc-items')
-        );
+        array( 
+			'acc_cat' => $category,
+			'posts_per_page' => -1,
+			'post_type' => 'acc-items',
+			'order' => abs_acc_get_option( 'accordion_order', 'abs_acc_basics', 'ASC' ),
+		)
+    );
 	$list = '<div class="accordion-box">';
 
 	while($q->have_posts()) : $q->the_post();
@@ -58,51 +123,7 @@ function abs_accordion_shortcode($atts){
 		$idd = get_the_ID();
 		
 		global $post;
-		$accordion_icon = get_post_meta($idd, 'accordion_icon', true);
-			
-			$list .= '<div class="collapse-card">
-					  <div class="title">';
-			if($accordion_icon){
-				$list .= '<i class="fa '.$accordion_icon.' fa-2x fa-fw"></i>';
-			}else{
-				$list .= '<i class="fa fa-question-circle fa-2x fa-fw"></i>';
-			}
-				$list .='<strong>'.get_the_title().'</strong>
-				</div>
-				<div class="body">
-					<p>'.get_the_content().'</p>
-				</div>
-				</div>
-				';        
-	endwhile;
-	$list.= '</div>';
-	wp_reset_query();
-	return $list;
-}
-add_shortcode('abs_accordion', 'abs_accordion_shortcode');
-
-
-*/
-
-
-/* This sortcode use for latest_news  */
-function abs_accordion_shortcode($atts){
-	extract( shortcode_atts( array(
-		'category' => '',
-	), $atts, 'category_post' ) );
-	
-    $q = new WP_Query(
-        array( 'acc_cat' => $category, 'posts_per_page' => -1, 'post_type' => 'acc-items')
-        );
-	$list = '<div class="accordion-box">
-	';
-
-	while($q->have_posts()) : $q->the_post();
-		//get the ID of your post in the loop
-		$idd = get_the_ID();
-		
-		global $post;
-		$accordion_icon = get_post_meta($idd, 'accordion_icon', true);
+		$accordion_icon = get_post_meta($idd, '_absacc_accordion_icon', true);
 			
 			$list .= '
 					<div class="collapse-card">
@@ -118,8 +139,13 @@ function abs_accordion_shortcode($atts){
 						</div>
 						<div class="collapse-card__body">
 							<p>'.get_the_content().'</p>
+							<div class="collapse-card__close_handler mt1 align-right mouse-pointer">
+								Show less <i class="fa fa-chevron-up"></i>
+							</div>
 						</div>
 					</div>
+					
+					
 					';        
 	endwhile;
 	$list.= '
@@ -131,18 +157,8 @@ add_shortcode('abs_accordion', 'abs_accordion_shortcode');
 
 
 
+/*------------ABS accordion shortcode button------------*/
 
-
-
-
-
-
-
-
-
-
-
-/* ABS accordion shortcode button*/
 function abs_accordion_buttons() {
 	add_filter ("mce_external_plugins", "my_external_js");
 	add_filter ("mce_buttons", "our_awesome_buttons");
@@ -161,9 +177,8 @@ add_action ('init', 'abs_accordion_buttons');
 
 
 
+/*------------This custom post for ABS Accordion------------*/
 
-
-/*This custom post for ABS Accordion*/
 add_action( 'init', 'abs_accordion_custompost' );
 
 function abs_accordion_custompost() {
@@ -202,7 +217,10 @@ function abs_accordion_custompost() {
 	register_post_type( 'acc-items', $args );
 }
 
-/* ----This Code for Woki Item Custom texonomy------*/
+
+
+/*------------This Code for ABS Accordion Custom taxonomy------------*/
+
 function abs_accordion_custom_post_taxonomy() {
 	register_taxonomy(
 		'acc_cat',  //The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces).
@@ -223,111 +241,15 @@ function abs_accordion_custom_post_taxonomy() {
 add_action( 'init', 'abs_accordion_custom_post_taxonomy'); 
 
 
-
-
-/**
- * Custom mata box for ABS Accordion
- */
-function abs_accordion_add_meta_box() {
-
-	$screens = array( 'acc-items' );
-
-	foreach ( $screens as $screen ) {
-
-		add_meta_box(
-			'abs_accordion_meta_box_id',
-			__( 'Accordion Icon', 'abs_accordion_plugin_textdomain' ),
-			'abs_accordion_plugin_meta_box_callback',
-			$screen
-		);
-	}
+/*--------------Meta-box settings for ABS accordion----------------*/
+add_action( 'init', 'be_initialize_cmb_meta_boxes', 9999 );
+function be_initialize_cmb_meta_boxes() {
+    if ( !class_exists( 'cmb_Meta_Box' ) ) {
+        require_once( 'inc/cmb/init.php' );
+    }
 }
-add_action( 'add_meta_boxes', 'abs_accordion_add_meta_box' );
+// Custom metaboxs option
+require_once('inc/cmb/cmb-option.php');
 
-/**
- * Prints the box content.
- * 
- * @param WP_Post $post The object for the current post/page.
- */
-function abs_accordion_plugin_meta_box_callback( $post ) {
-
-	// Add an nonce field so we can check for it later.
-	wp_nonce_field( 'abs_accordion_plugin_meta_box', 'abs_accordion_plugin_meta_box_nonce' );
-
-	/*
-	 * Use get_post_meta() to retrieve an existing value
-	 * from the database and use the value for the form.
-	 */
-	$accordion_icon = get_post_meta($idd, 'accordion_icon', true);
-	
-	echo '<label for="abs_accordion_new_field">';
-	_e( 'Put the icon code', 'abs_accordion_plugin_textdomain' );
-	echo '</label> ';
-	
-	echo '<input type="text" id="abs_accordion_new_field" name="abs_accordion_new_field" value="' . esc_attr( $accordion_icon ) . '" size="25" />';
-	
-	echo'<br/>';
-
-	echo '<label for="abs_accordion_new_field">';
-	_e( '<b style="color:green;">HELP</b><br/>You can get icon code list from <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome icon service</a> <br/> You can see video tutorial how to use icon in ABS Accordion item from <a href="http://youtu.be/UWrgV711Vyk" target="_blank">Here</a>', 'abs_accordion_plugin_textdomain' );
-	echo '</label> ';
-	
-}
-
-/**
- * When the post is saved, saves our custom data.
- *
- * @param int $post_id The ID of the post being saved.
- */
-function abs_accordion_save_meta_box_data( $post_id ) {
-
-	/*
-	 * We need to verify this came from our screen and with proper authorization,
-	 * because the save_post action can be triggered at other times.
-	 */
-
-	// Check if our nonce is set.
-	if ( ! isset( $_POST['abs_accordion_plugin_meta_box_nonce'] ) ) {
-		return;
-	}
-
-	// Verify that the nonce is valid.
-	if ( ! wp_verify_nonce( $_POST['abs_accordion_plugin_meta_box_nonce'], 'abs_accordion_plugin_meta_box' ) ) {
-		return;
-	}
-
-	// If this is an autosave, our form has not been submitted, so we don't want to do anything.
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return;
-	}
-
-	// Check the user's permissions.
-	if ( isset( $_POST['post_type'] ) && 'page' == $_POST['post_type'] ) {
-
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return;
-		}
-
-	} else {
-
-		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			return;
-		}
-	}
-
-	/* OK, it's safe for us to save the data now. */
-	
-	// Make sure that it is set.
-	if ( ! isset( $_POST['abs_accordion_new_field'] ) ) {
-		return;
-	}
-
-	// Sanitize user input.
-	$my_data = sanitize_text_field( $_POST['abs_accordion_new_field'] );
-
-	// Update the meta field in the database.
-	update_post_meta( $post_id, 'accordion_icon', $my_data );
-}
-add_action( 'save_post', 'abs_accordion_save_meta_box_data' );
 
 ?>

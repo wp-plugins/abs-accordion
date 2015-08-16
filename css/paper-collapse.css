@@ -9,7 +9,7 @@
 */
 .collapse-card {
   background-color: #fff;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid;
   color: #777;
   -webkit-transition: 0.4s;
   -moz-transition: 0.4s;
@@ -53,26 +53,35 @@
 .collapse-card__heading::after {
   color: #404040;
   font-family: 'FontAwesome';
-  font-size: 1rem;
+  font-size: 18px;
   line-height: 2rem;
   padding-left: .4rem;
   position: absolute;
-  right: 1rem;
-  top: 1rem;
+  right: 20px;
+  top: 35%;
 }
 
 .collapse-card__title {
-  font-size: 1rem;
-  line-height: 2rem;
-  margin: 0 2rem 0 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 5px;
 }
 
 .collapse-card__body {
-  padding: 1rem;
+  padding: 20px;
   display: none;
+  position:relative;
+  font-size:15px;
 }
-
+.collapse-card__close_handler{
+    border: 1px solid #e1e1e1;
+    padding: 0px 5px;
+    display: block;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    border-radius: 3px;
+	cursor: pointer;
+}
 /*# sourceMappingURL=paper-collapse.css.map */
