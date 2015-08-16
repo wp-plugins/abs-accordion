@@ -1,5 +1,6 @@
 === ABS Accordion ===
-Donate link: http://www.absiddik.net
+Contributors: siddiknmh
+Donate link: http://wexteam.com
 Tags: Accordion, Faq Accordion, jQuery type effect, Type effect jQuery accordion
 Requires at least: 3.9
 Tested up to: 4.2.4
