@@ -63,23 +63,10 @@ This plugin have a premium version. There have many more features. If you need t
 
 == Screenshots ==
 
-1. Installed in demo server.
+1. Easy settings options. 
 
 2. TinyMCE Button
 
-3. ABS Accordion custompost 
-
-4. Add New ABS Accordion post 
-
-5. Put Accordion Ttitle and content 
-
-6. Add new category and select category 
-
-7. Photo in accordion
-
-8. YouTube video in accordion
-
-9. Vimeo video  in accordion
 
 == Changelog ==
 
